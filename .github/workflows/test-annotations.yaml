@@ -1,0 +1,15 @@
+name: "Test the annotation functionality"
+
+on: workflow_dispatch
+
+jobs:
+  annotate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Annotate
+        run: |
+          ERRORS=("Host or Service not found" "Returned NT_ACCESS_DENIED" "No response")
+          ERROR_TITLES=("DOMSTOL101.AT.DOMSTOL.NO" "DOMSTOL102.AT.DOMSTOL.NO" "DOMSTOL103.AT.DOMSTOL.no")
+          for (( i=0; i<${#ERRORS[*]}; ++i )); do
+            echo "::warning title=${ERROR_TITLES[$i]}::${ERRORS[$i]}"
+          done
