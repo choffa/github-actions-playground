@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Output of job-a"
-  
+
   job-b:
     runs-on: ubuntu-latest
     needs: job-a
     steps:
       - run: exit 1
-  
+
   final:
     runs-on: ubuntu-latest
     needs: job-b
@@ -21,6 +21,20 @@ jobs:
     steps:
       - if: ${{ failure() }}
         run: echo "This should print"
-      
+
       - if: ${{ success() }}
         run: echo "This should NOT print"
+
+  final-success:
+    runs-on: ubuntu-latest
+    needs: job-b
+    if: ${{ success() }}
+    steps:
+      - run: echo "This should NOT print"
+
+  final-failure:
+    runs-on: ubuntu-latest
+    needs: job-b
+    if: ${{ failure() }}
+    steps:
+      - run: echo "This should print"
