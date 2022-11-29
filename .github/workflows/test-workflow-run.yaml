@@ -1,0 +1,16 @@
+name: Test Workflow Run
+
+on:
+  workflow_run:
+    workflows: [Test workflow dispatch]
+    types:
+      - requested
+
+jobs:
+  print-event:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          EVENT: ${{ toJson(github.event) }}
+        run: echo "DONE"
+      

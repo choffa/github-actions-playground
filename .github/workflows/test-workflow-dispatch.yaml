@@ -1,0 +1,22 @@
+name: Test workflow dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      openshift_cluster:
+        description: What cluster
+        required: true
+        type: choice
+        options:
+          - test
+          - at
+          - prod
+
+jobs:
+  dummy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Doing work"
+          sleep 2
+          echo "Done"
