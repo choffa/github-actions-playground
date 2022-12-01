@@ -20,3 +20,9 @@ jobs:
           echo "Doing work"
           sleep 2
           echo "Done"
+  
+  deploy_at:
+    uses: ./.github/workflows/test-workflow-call.yaml
+    needs: dummy
+    with:
+      cluster: ${{ inputs.openshift_cluster }}
