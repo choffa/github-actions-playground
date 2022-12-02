@@ -1,0 +1,13 @@
+name: Test User Permissions
+
+on: workflow_dispatch
+
+jobs:
+  test-permissions:
+    runs-on: ubuntu-latest
+    steps:
+      - id: test
+        uses: actions-cool/check-user-permission@v2
+      - run: echo "${{ toJson(steps.test.outputs.user-permission) }}"
+      - run: echo "${{ toJson(steps.test.outputs.require-result) }}"
+      - run: echo "${{ toJson(steps.test.outputs.check-result) }}"
