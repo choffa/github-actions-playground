@@ -1,0 +1,18 @@
+name: Test artefact upload
+
+on: workflow_dispatch
+
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create files
+        run: |-
+          for i in {1..100}
+          do
+            echo "This is file number ${i}" > "file${i}.txt"
+          done
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          path: file*.txt        
