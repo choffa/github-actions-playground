@@ -17,3 +17,10 @@ jobs:
           echo "$SECONDS"
           sleep 10
           echo "$SECONDS"
+
+
+          start_time=$(date +%s%N)
+          sleep 1
+          end_time=$(date +%s%n)
+          elapsed=$(( (end_time - start_time) / 1000 ))
+          echo "Elapsed ${elapsed}ms"
