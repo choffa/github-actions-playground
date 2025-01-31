@@ -21,6 +21,6 @@ jobs:
 
           start_time=$(date +%s%N)
           sleep 1
-          end_time=$(date +%s%n)
+          end_time=$(date +%s%N)
           elapsed=$(( (end_time - start_time) / 1000 ))
           echo "Elapsed ${elapsed}ms"
