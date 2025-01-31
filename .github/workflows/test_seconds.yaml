@@ -1,0 +1,19 @@
+name: "Test timing of processes"
+
+on: workflow_dispatch
+
+jobs:
+  annotate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Main
+        run: |-
+          echo "$SECONDS"
+          sleep 10
+          echo "$SECONDS"
+          
+          SECONDS=0
+          
+          echo "$SECONDS"
+          sleep 10
+          echo "$SECONDS"
