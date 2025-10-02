@@ -1,0 +1,39 @@
+name: Test Matrix Syntax
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Prepare matrix
+        id: set-matrix
+        run: |
+          echo "Preparing matrix..."
+          # Simulate matrix preparation logic
+          MATRIX='[{"chart_name":"chart1","chart_path":"charts/chart1","tag_name":"v1.0.0","version":"1.0.0"},{"chart_name":"chart2","chart_path":"charts/chart2","tag_name":"v2.0.0","version":"2.0.0"}]'
+          echo "$MATRIX"
+          echo "matrix={\"include\":$MATRIX}" >> $GITHUB_OUTPUT
+
+  publish-charts:
+    if: needs.prepare-matrix.outputs.matrix != '{"include":[]}'
+    needs: prepare-matrix
+    name: Echo ${{ matrix.chart_name }} info
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(needs.prepare-matrix.outputs.matrix) }}
+      fail-fast: false
+    steps:
+      - name: Echo debug info
+        run: |
+          echo "Chart Name: ${{ matrix.chart_name }}"
+          echo "Chart Path: ${{ matrix.chart_path }}"
+          echo "Tag Name: ${{ matrix.tag_name }}"
+          echo "Version: ${{ matrix.version }}"
