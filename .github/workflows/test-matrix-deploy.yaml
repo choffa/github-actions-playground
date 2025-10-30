@@ -5,10 +5,13 @@ on: "workflow_dispatch"
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
     strategy:
       matrix:
         app: [app1, app2, app3]
         environment: [staging, production]
+    
     steps:
       - name: Deploy ${{ matrix.app }} to ${{ matrix.environment }}
         run: echo "Deploying ${{ matrix.app }} to ${{ matrix.environment }} environment"
+
