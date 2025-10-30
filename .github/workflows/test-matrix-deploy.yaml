@@ -8,8 +8,8 @@ jobs:
     environment: ${{ matrix.environment }}
     strategy:
       matrix:
-        app: [app1, app2, app3]
         environment: [staging, production]
+        app: [app1, app2, app3]
     
     steps:
       - name: Deploy ${{ matrix.app }} to ${{ matrix.environment }}
