@@ -1,0 +1,17 @@
+name: Test JS Output
+
+on: workflow_dispatch
+
+jobs:
+  test-js-output:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create output
+        uses: actions/github-script@v7
+        with:
+          script: |
+            var output = { foo: 'bar', baz: 42 };
+            core.setOutput('data', output);
+      - name: Verify output
+        run: |
+          echo "Output data: ${{ steps.create-output.outputs.data }}"
