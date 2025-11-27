@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show Workflow Context
-        run: echo "I am workflow on main branch"
+        run: echo "I am workflow on test branch!"
 
   head_ref:
     runs-on: ubuntu-latest
