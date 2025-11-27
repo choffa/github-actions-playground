@@ -1,0 +1,22 @@
+name: Test Pull Request Target
+
+on: [pull_request_target, workflow_dispatch]
+
+jobs:
+  workflow_context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Workflow Context
+        run: echo "I am workflow on main branch"
+
+  pr_context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR Code
+        uses: actions/checkout@v6
+      - name: Show PR Context
+        run: cat pr_context.txt
+      - name: Show PR Branch
+        run: echo "${{ github.head_ref }}"
+      - name: Show Base Branch
+        run: echo "${{ github.base_ref }}"
