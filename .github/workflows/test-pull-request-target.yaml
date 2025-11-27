@@ -31,3 +31,13 @@ jobs:
           ref: ${{ github.base_ref }}
       - name: Show Base Context
         run: cat pr_context.txt
+
+  default_ref:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Default Ref
+        run: echo "${{ github.ref }}"
+      - name: Checkout Default Code
+        uses: actions/checkout@v6
+      - name: Show Default Context
+        run: cat pr_context.txt
